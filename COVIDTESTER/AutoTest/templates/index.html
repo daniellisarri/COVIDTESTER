@@ -1,11 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% load static %}
+{% include 'superior.html' %}
+<!--
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+ __  .__   __.  __    ______  __    ______   
+|  | |  \ |  | |  |  /      ||  |  /  __  \  
+|  | |   \|  | |  | |  ,----'|  | |  |  |  | 
+|  | |  . `  | |  | |  |     |  | |  |  |  | 
+|  | |  |\   | |  | |  `----.|  | |  `--'  | 
+|__| |__| \__| |__|  \______||__|  \______/  
 
-</body>
-</html>
+ Este archivo será la página de inicio de la app.
+ Carga contenido estático.
+ Incluye cabecera y pié.
+
+ Contiene: 
+ - Sección banner
+ - Sección contenido principal (Vacía, al menos por ahora)
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-->
+
+<!-- Banner -->
+<section id="banner">
+    <h2>COVIDTESTER</h2>
+    <p>Una pequeña descripción quizás???</p>
+    <!-- <ul class="actions"> <li> <a href="ORDO.html" class="button special">Leer
+    más</a> </li> </ul> -->
+</section>
+
+<!-- Main -->
+<section id="main" class="container">
+
+</section>
+
+{% include 'inferior.html' %}
