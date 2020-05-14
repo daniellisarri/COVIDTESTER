@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from AutoTest import views
 
 ### Añadir direccion index
 ### Añadir direccion formulario AutoTest
@@ -25,4 +26,9 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index, name="index"),
+    path('index/', views.index, name="index"),
+    path('AutoTest/', views.auto_Test, name="AutoTest"),
 ]
+
+
