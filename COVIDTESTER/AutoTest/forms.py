@@ -1,16 +1,13 @@
 from django import forms
 
-class FormularioContacto(forms.Form):
-    asunto = forms.CharField()
-    email = forms.EmailField()
-    mensaje = forms.CharField()
-
 class Formulario_AutoTest(forms.Form):
+    cp = forms.CharField(
+        max_length=5, 
+        widget = forms.TextInput({"placeholder":"Código postal"}))
     edad = forms.IntegerField()
-    sexo = forms.CharField(max_length=1)
-    cp = forms.CharField(max_length=5)
-    fiebre = forms.BooleanField()
-    tos_seca = forms.BooleanField()
-    axfixia = forms.BooleanField()
-    perdida_sentidos = forms.BooleanField()
-    repentino = forms.BooleanField()
+    sexo = forms.ChoiceField(choices=(("Hombre","Hombre"),("Mujer","Mujer")))
+    fiebre = forms.BooleanField(required=False)
+    tos_seca = forms.BooleanField(required=False)
+    asfixia = forms.BooleanField(required=False)
+    perdida_sentidos = forms.BooleanField(required=False)
+    repentino = forms.BooleanField(required=False)

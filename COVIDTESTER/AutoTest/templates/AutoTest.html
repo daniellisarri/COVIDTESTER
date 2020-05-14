@@ -4,23 +4,129 @@
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
-     ___       __    __  .___________.  ______   .___________. _______      _______..___________.
-    /   \     |  |  |  | |           | /  __  \  |           ||   ____|    /       ||           |
-   /  ^  \    |  |  |  | `---|  |----`|  |  |  | `---|  |----`|  |__      |   (----``---|  |----`
-  /  /_\  \   |  |  |  |     |  |     |  |  |  |     |  |     |   __|      \   \        |  |     
- /  _____  \  |  `--'  |     |  |     |  `--'  |     |  |     |  |____ .----)   |       |  |     
-/__/     \__\  \______/      |__|      \______/      |__|     |_______||_______/        |__|    
-
- Este archivo contiene el formulario principal para el AutoTest.
- Carga contenido estático.
- Incluye cabecera y pié.
-
- Contiene: 
- -
+___ __ __ .___________. ______ .___________. _______ _______..___________. / \ |
+| | | | | / __ \ | || ____| / || | / ^ \ | | | | `---| |----`| | | | `---|
+|----`| |__ | (----``---| |----` / /_\ \ | | | | | | | | | | | | | __| \ \ | | /
+_____ \ | `--' | | | | `--' | | | | |____ .----) | | | /__/ \__\ \______/ |__|
+\______/ |__| |_______||_______/ |__| Este archivo contiene el formulario
+principal para el AutoTest. Carga contenido estático. Incluye cabecera y pié.
+Contiene: -
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -->
 
+<!-- {% if form.errors %} <p style="color: red;">Por favor, revise este
+campo</p> {% endif %} -->
+
+<section id="main" class="container 75%">
+    <header style="padding-top: 15em;">
+        <h2>
+            <strong style="color: #1A4883;">AutoTest COVID-19</strong>
+        </h2>
+    </header>
+    <div class="box" style="background-color: #EDF0F3;">
+        <form action="/AutoTest/" method="POST">{% csrf_token %}
+            <table>
+                <tr>
+                    <th>
+                        <label for="id_cp">Cp:</label>
+                    </th>
+                    <td>
+                        <input type="text" name="cp" value="12345" placeholder="Código postal" maxlength="5" required="required" id="id_cp">
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_edad">Edad:</label>
+                    </th>
+                    <td>
+                        <input type="number" name="edad" value="1" required="required" id="id_edad"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_sexo">Sexo:</label>
+                    </th>
+                    <td>
+                        <ul class="errorlist">
+                            <li>Select a valid choice. 0 is not one of the available choices.</li>
+                        </ul>
+                        <select name="sexo" id="id_sexo">
+                            <option value="Hombre">Hombre</option>
+
+                            <option value="Mujer">Mujer</option>
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_fiebre">Fiebre:</label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="fiebre" id="id_fiebre"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_tos_seca">Tos seca:</label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="tos_seca" id="id_tos_seca" checked="checked"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_asfixia">Asfixia:</label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="asfixia" id="id_asfixia"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_perdida_sentidos">Perdida sentidos:</label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="perdida_sentidos" id="id_perdida_sentidos"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_repentino">Repentino:</label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="repentino" id="id_repentino"></td>
+                </tr>
+                <input type="submit" value="Enviar" style="background-color: #154481;"/>
+            </table>
+            <!-- <div class="row uniform 100%"> <div class="12u 12u(mobilep)"> <label
+            for="cp">Código postal: </label>{{ form.cp }} </div> </div> <div class="row
+            uniform 100%"> <div class="6u 12u(mobilep)"> <label for="edad">Edad: </label> {{
+            form.edad }} </div> <div class="6u 12u(mobilep)"> <label for="sexo">Sexo:
+            </label> {{ form.sexo }} </div> </div> <div class="row uniform 100%"> <div
+            class="12u 12u(mobilep)" style="text-align: center;"> <h4>Indique si ha padecido
+            alguno de los sigientes síntomas, y en caso de haberlos padecido, indique si fué
+            de manera repentina:</h4> </div> </div> <div class="row uniform 100%"> <div
+            class="3u 12u(mobilep)"> <label for="fiebre">Fiebre</label><input
+            type="checkbox" name="fiebre" id="id_fiebre" style="opacity: 100;"> </div> <div
+            class="3u 12u(mobilep)"> <label for="tos_seca">Tos seca</label><input
+            type="checkbox" name="tos_seca" id="id_tos_seca" style="opacity: 100;"> </div>
+            <div class="3u 12u(mobilep)"> <label for="asfixia">Asfixia</label><input
+            type="checkbox" name="asfixia" id="id_asfixia" style="opacity: 100;"> </div>
+            <div class="3u 12u(mobilep)"> <label for="perdida_sentidos">Perdida del
+            gusto</label><input type="checkbox" name="perdida_sentidos"
+            id="id_perdida_sentidos" style="opacity: 100;"> </div> </div> <div class="row
+            uniform 100%"> <div class="3u 12u(mobilep)"> <label for="fiebre">¿Ha sido
+            repentino?</label><input type="checkbox" name="fiebre" id="id_fiebre"
+            style="opacity: 100;"> </div> </div> <div class="row uniform"> <div class="12u">
+            <ul class="actions align-center"> <li><input type="submit" value="Enviar"
+            style="background-color: #154481;" /></li> <li><input type="button"
+            value="Limpiar" style="background-color: #E2EEF6; color: #24536B;" /></li>
+            <li><a href="#" style="color: #24536B;">Volver</a></li> </ul> </div> </div> -->
+        </form>
+    </div>
+</section>
+
+<!-- <section id="main" class="container 75%"> <header> <h2>Contacta</h2>
+<p>Pregunta, opina o manda cualquier sugerencia</p> </header> <div class="box">
+<form action="" method="POST">{% csrf_token %} <table> {{ form.as_table }}
+</table> <input type="submit" value="Enviar"> </form> </div> </section> -->
 
 {% include 'inferior.html' %}
