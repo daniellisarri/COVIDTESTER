@@ -46,8 +46,6 @@ def auto_Test(request):
     else:
         formulario = Formulario_AutoTest()
 
-    print(formulario)
-
     return render(request, "AutoTest.html", {"title":"AutoTest", "form":formulario})
 
 """ def contacto(request):
