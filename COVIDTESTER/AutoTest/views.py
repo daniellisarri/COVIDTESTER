@@ -38,6 +38,8 @@ def auto_Test(request):
 
             print(formulario.cleaned_data)
 
+            #############
+
             # AQUÍ DECIDIMOS A DONDE REDIRIGIR, SI ES POSITIVO O NEGATIVO
             #
             #
@@ -48,17 +50,5 @@ def auto_Test(request):
 
     return render(request, "AutoTest.html", {"title":"AutoTest", "form":formulario})
 
-""" def contacto(request):
-    if request.method=="POST":
-        miFormulario = FormularioContacto(request.POST)
-
-        if miFormulario.is_valid():
-            infForm = miFormulario.cleaned_data
-            send_mail(infForm['asunto'], infForm['mensaje'],
-            infForm.get('email', ''), ['COVIDTESTER.0@gmail.com'],)
-
-            return render(request, "gracias.html")
-    else:
-        miFormulario = FormularioContacto()
-    
-    return render(request, "formulario_contacto.html", {"form":miFormulario}) """
+def condiciones (request):
+    return render(request, "condiciones.html", {"title":"Condiciones y políticas"})
