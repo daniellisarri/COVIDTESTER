@@ -26,7 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STATICFILES_DIRS = [
+STATICFILES_DIRS = [ # Directorio estático
     "C:/Users/danie/OneDrive/Escritorio/COVIDTESTER_LOCAL/COVIDTESTER/AutoTest/static",
 ]
 
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', # IMPORTANTE para variables estáticas
+    'django.contrib.staticfiles', # IMPORTANTE para directorios estáticos
     'AutoTest',
 ]
 
@@ -120,4 +120,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/' # IMPORTANTE para variables estáticas
+STATIC_URL = '/static/' # IMPORTANTE para archivos estáticos
