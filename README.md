@@ -3,8 +3,6 @@
 _Proyecto de aplicación web apra la rápida detección de contagios por COVID-19 y recogida de datos para su posterior estudio._
 
 ### Pre-requisitos 📋
-<<<<<<< HEAD
-
 _Requisitos necesarios para ver los avances del proyecto._
 
 + Para poder ver los avances de este proyecto necesitas, en cuanto a hardware:
