@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+    <head>
+<!--
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+  ______      ___      .______    _______   ______  _______ .______           ___      
+ /      |    /   \     |   _  \  |   ____| /      ||   ____||   _  \         /   \     
+|  ,----'   /  ^  \    |  |_)  | |  |__   |  ,----'|  |__   |  |_)  |       /  ^  \    
+|  |       /  /_\  \   |   _  <  |   __|  |  |     |   __|  |      /       /  /_\  \   
+|  `----. /  _____  \  |  |_)  | |  |____ |  `----.|  |____ |  |\  \----. /  _____  \  
+ \______|/__/     \__\ |______/  |_______| \______||_______|| _| `._____|/__/     \__\ 
+
+ Este archivo servirá de cabecera para toda la app.
+ Carga contenido estático.
+
+ Contiene: 
+ - Título, pasado desde Views
+ - Favicon
+ - Charset
+ - Header
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-->  
+        <!-- TITULO -->
+        <title>{{title}}</title>
+        <!-- FAVICON -->
+        <link rel="icon" type="image/icon" href="{% static 'images/favicon.ico' %}">
+        <!-- META -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- ESTILOS -->
+        <link rel="stylesheet" href="{% static 'assets/css/main.css' %}"/>
+    </head>
+    <body class="landing">
+        <div id="page-wrapper" style="background-color: rgb(255, 255, 255);">
+
+            <!-- Header -->
+        {% if title == 'AutoTest' %}
+            <header id="header" class="alt" style="position: fixed; background: #444;">
+        {% else %}
+            <header id="header" class="alt">
+        {% endif %}
+                <h1>
+                    <a href="{% url 'index' %}">COVIDTESTER</a>
+                </h1>
+                <nav id="nav">
+                    <ul>
+                        <li>
+                            <a href="{% url 'index' %}">Página principal</a>
+                        </li>
+                        <li>
+                            <a href="#" class="icon fa-angle-down">Aplicaciones ↓</a>
+                            <ul>
+                                <li>
+                                    <a href="{% url 'AutoTest' %}">Autotest</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </header>

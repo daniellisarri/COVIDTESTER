@@ -1,0 +1,53 @@
+{% load static %}
+<!--
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+ _______   ______     ______   .___________. _______ .______      
+|   ____| /  __  \   /  __  \  |           ||   ____||   _  \     
+|  |__   |  |  |  | |  |  |  | `---|  |----`|  |__   |  |_)  |    
+|   __|  |  |  |  | |  |  |  |     |  |     |   __|  |      /     
+|  |     |  `--'  | |  `--'  |     |  |     |  |____ |  |\  \----.
+|__|      \______/   \______/      |__|     |_______|| _| `._____|
+
+ Este archivo será la parte inferior estática de toda la app.
+ Carga contenido estático.
+
+ Contiene: 
+ - Sección de contacto
+ - Pié de página
+ - Scrits (Bootstrap)
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-->
+
+<!-- CTA -->
+<section id="cta" style="padding: 1em 0 0.5em 0;">
+    <h2>Contácta con nosotrso para solucionar cualquier duda o ser atendido por servicios sanitarios.</h2>
+    <ul class="actions">
+        <li>
+            <a href="#" class="button alt">Contactar</a>
+        </li>
+    </ul>
+</section>
+
+<!-- Footer -->
+<footer id="footer" style="padding: 1em 0 1em 0;">
+    <ul class="copyright">
+        <li>&copy; Untitled.</li>
+    </ul>
+</footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.scrollgress.min.js' %}"></script>
+<script src="{% static 'assets/js/skel.min.js' %}"></script>
+<script src="{% static 'assets/js/util.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+</html>
