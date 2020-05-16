@@ -18,4 +18,3 @@ class Formulario(models.Model):
     axfixia = models.BooleanField()
     perdida_sentidos = models.BooleanField()
     repentino = models.BooleanField()
-

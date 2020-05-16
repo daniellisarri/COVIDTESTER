@@ -9,18 +9,133 @@
    /  ^  \    |  |  |  | `---|  |----`|  |  |  | `---|  |----`|  |__      |   (----``---|  |----`
   /  /_\  \   |  |  |  |     |  |     |  |  |  |     |  |     |   __|      \   \        |  |     
  /  _____  \  |  `--'  |     |  |     |  `--'  |     |  |     |  |____ .----)   |       |  |     
-/__/     \__\  \______/      |__|      \______/      |__|     |_______||_______/        |__|    
-
- Este archivo contiene el formulario principal para el AutoTest.
- Carga contenido estático.
- Incluye cabecera y pié.
-
- Contiene: 
+/__/     \__\  \______/      |__|      \______/      |__|     |_______||_______/        |__|     
+                                                                                                 
+ Este archivo contiene el formulario
+ principal para el AutoTest. Carga contenido estático. Incluye cabecera y pié.
+ 
+ Contiene:
  -
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -->
 
+<style>
+#id_edad {
+    -webkit-appearance: none;
+    background: #f8f8f8;
+    border-radius: 6px;
+    border: solid 1px #e5e5e5;
+    color: inherit;
+    display: block;
+    outline: 0;
+    padding: 0 1em;
+    text-decoration: none;
+    width: 100%;
+    height: 3em;
+}
+select {
+    background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), radial-gradient(#ddd 70%, transparent 72%);
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) 0.5em;
+    background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+    background-repeat: no-repeat;
+}
+
+select:focus {
+    background-image: linear-gradient(45deg, white 50%, transparent 50%), linear-gradient(135deg, transparent 50%, white 50%), radial-gradient(gray 70%, transparent 72%);
+    background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, calc(100% - .5em) 0.5em;
+    background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+    background-repeat: no-repeat;
+    border-color: green;
+    outline: 0;
+}
+
+</style>
+
+<section id="main" class="container 75%">
+    <header style="padding-top: 15em;">
+        <h2>
+            <strong style="color: #1A4883;">AutoTest COVID-19</strong>
+        </h2>
+        <p>Esta aplicación te permitirá hacer un seguimiento de la evolución de los síntomas y te dará las indicaciones y consejos a seguir en cada caso.</p>
+        <p>El uso de este servicio supone la aceptación de los términos y la política de privacidad descritos en</p>
+        <a href="{% url 'condiciones' %}">'Ver las condiciones y políticas'</a>
+    </header>
+    <div class="box" style="background-color: #EDF0F3;">
+        <form action="/AutoTest/" method="POST">{% csrf_token %}
+            <div class="row uniform 100%">
+                <div class="12u 12u(mobilep)">
+                    <label for="id_cp">Código postal:</label>
+                    <input type="text" name="cp" placeholder="Código postal" maxlength="5" required="required" id="id_cp">
+                </div>
+            </div>
+            <div class="row uniform 100%">
+                <div class="6u 12u(mobilep)">
+                    <label for="id_edad">Edad:</label>
+                    <input type="number" name="edad" required="required" id="id_edad" min="0">
+                </div>
+                <div class="6u 12u(mobilep)">
+                    <label for="id_sexo">Sexo:</label>
+                    <select name="sexo" id="id_sexo">
+                         <option value="Hombre">Hombre</option>
+                         <option value="Mujer">Mujer</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row uniform 100%">
+                <div class="12u 12u(mobilep)" style="text-align: center;">
+                    <h4>Indique si ha padecido alguno de los sigientes síntomas, y en caso de
+                        haberlos padecido, indique si fué de manera repentina:</h4>
+                </div>
+            </div>
+            <div class="row uniform 100%">
+                <div class="3u 12u(mobilep)">
+                    <label for="id_fiebre">
+                        <input type="checkbox" name="fiebre" id="id_fiebre" style="opacity: 100%; margin-right: 0;">
+                        <span>Fiebre</span>
+                    </label>
+               </div>
+                <div class="3u 12u(mobilep)">
+                    <label for="id_tos_seca">
+                        <input type="checkbox" name="tos_seca" id="id_tos_seca" style="opacity: 100%; margin-right: 0;">
+                        <span>Tos seca</span>
+                    </label>
+               </div>
+                <div class="3u 12u(mobilep)">
+                    <label for="id_asfixia">
+                        <input type="checkbox" name="asfixia" id="id_asfixia" style="opacity: 100%; margin-right: 0;">
+                        <span>Asfixia</span>
+                    </label>
+               </div>
+               <div class="3u 12u(mobilep)">
+                    <label for="id_perdida_sentidos">
+                        <input type="checkbox" name="perdida_sentidos" id="id_perdida_sentidos" style="opacity: 100%; margin-right: 0;">
+                        <span>Perdida del gusto</span>
+                    </label>
+               </div>
+            </div>
+            <div class="row uniform 100%">
+               <div class="3u 12u(mobilep)">
+                    <label for="id_repentino">
+                        <input type="checkbox" name="repentino" id="id_repentino" style="opacity: 100%; margin-right: 0;">
+                        <span>¿Ha sido repentino?</span>
+                    </label>
+               </div>
+            </div>
+            <div class="row uniform">
+                <div class="12u">
+                    <ul class="actions align-center">
+                        <li><input type="submit" value="Enviar" style="background-color: #154481;"/></li>
+                        <li><input type="reset" value="Limpiar" style="background-color: #E2EEF6; color: #24536B;"/></li>
+                        <li>
+                            <a href="javascript:history.back()" style="color: #24536B;">Volver</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
 
 {% include 'inferior.html' %}

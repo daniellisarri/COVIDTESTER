@@ -18,7 +18,7 @@
 
  Contiene: 
  - Título, pasado desde Views
- - Favicon (PROVISIONAL) ----------------
+ - Favicon
  - Charset
  - Header
 -------------------------------------------------------------------------------------------------
@@ -36,10 +36,14 @@
         <link rel="stylesheet" href="{% static 'assets/css/main.css' %}"/>
     </head>
     <body class="landing">
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="background-color: rgb(255, 255, 255);">
 
             <!-- Header -->
+        {% if title == 'AutoTest' %}
+            <header id="header" class="alt" style="position: fixed; background: #444;">
+        {% else %}
             <header id="header" class="alt">
+        {% endif %}
                 <h1>
                     <a href="{% url 'index' %}">COVIDTESTER</a>
                 </h1>
@@ -52,7 +56,7 @@
                             <a href="#" class="icon fa-angle-down">Aplicaciones ↓</a>
                             <ul>
                                 <li>
-                                    <a href="{% url 'index' %}">Autotest</a>
+                                    <a href="{% url 'AutoTest' %}">Autotest</a>
                                 </li>
                             </ul>
                         </li>
