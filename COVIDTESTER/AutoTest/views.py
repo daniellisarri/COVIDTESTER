@@ -3,56 +3,105 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Template, Context
 from django.template.loader import get_template
-from django.shortcuts import render
+from AutoTest.models import Test, Usuario
 
-from AutoTest.models import Formulario, Usuario
-
-from AutoTest.forms import Formulario_AutoTest
+from AutoTest.forms import Formulario_AutoTest, Formulario_Positivo
 
 # Create your views here.
 
-### Vista index
-### Vista formulario AutoTest
-### Vista positivo
-### Vista negativo
-
+# Vista de inicio
 def index(request):
     return render(request, "index.html", {"title":"Inicio"})
 
+# Vista para formulario AutoTest
 def auto_Test(request):
-
+    # Si ha llegado mediante POST (tras hacer el formulario) se pasa a la vista resultado
     if request.method=="POST":
+        formulario_autotest = Formulario_AutoTest(request.POST)
 
-        formulario = Formulario_AutoTest(request.POST)
+        # Si el formulario es válido se pasa a la vista resultado
+        if formulario_autotest.is_valid():
+            infForm_autotest = formulario_autotest.cleaned_data
+            cp = infForm_autotest['cp']
+            edad = infForm_autotest['edad']
+            sexo = infForm_autotest['sexo']
+            fiebre = infForm_autotest['fiebre']
+            tos_seca = infForm_autotest['tos_seca']
+            asfixia = infForm_autotest['asfixia']
+            perdida_sentidos = infForm_autotest['perdida_sentidos']
+            repentino = infForm_autotest['repentino']
 
-        if formulario.is_valid():
-            infForm = formulario.cleaned_data
-            cp = infForm['cp']
-            edad = infForm['edad']
-            sexo = infForm['sexo']
-            fiebre = infForm['fiebre']
-            tos_seca = infForm['tos_seca']
-            asfixia = infForm['asfixia']
-            perdida_sentidos = infForm['perdida_sentidos']
-            repentino = infForm['repentino']
+            usu = Usuario(edad, sexo, cp)
+            test = Test(fiebre, tos_seca, asfixia, perdida_sentidos, repentino)
 
-            print(formulario.cleaned_data)
-
-            #############
-
-            # AQUÍ DECIDIMOS A DONDE REDIRIGIR, SI ES POSITIVO O NEGATIVO
-            #por ahora te redirije a un prueba.html porque aun no dispongo de los html de positivo y negativo (pendiente de cambio) Javi
-            #la condicion es verdadera si cualquiera de las variables del parentesis es true y si repentino es true, 
-            #si no se cumple te envia al index.html (pendiente de cambio cuando este el archivo negativo) Javi
-            if (perdida_sentidos or fiebre or tos_seca or asfixia) and repentino :
-                return render(request, "prueba.html", {"title": "infectado"})
+            # Determina Positivo/Negativo
+            if (perdida_sentidos or fiebre or tos_seca or asfixia) and repentino:
+                res = True
             else:
-                return render(request, "index.html", {"title": "no infectado"})
-            #return render(request, "index.html", {"title":"FORMULARIO ENVIADO"}) # Esta linea es para comprobar que funciona, pero sobra
+                res = False
+
+            # Pasa a la vista resultado, pasando datos de usuario y test
+            return resultado(request, usu, test, res)
+        
+        # Si el formulario no es válido, regresa a AutoTest con un mensaje de error
+        else:
+            return render(request, "AutoTest.html", {"title":"AutoTest", "error":"Se ha producido un error", "form":formulario_autotest})
+
+    # Si ha llegado mediante GET, va a AutoTest
     else:
-        formulario = Formulario_AutoTest()
+        formulario_autotest = Formulario_AutoTest()
 
-    return render(request, "AutoTest.html", {"title":"AutoTest", "form":formulario})
+    return render(request, "AutoTest.html", {"title":"AutoTest", "form":formulario_autotest})
 
-def condiciones (request):
+# Vista de "Redirección" según positivo/negativo
+def resultado(request, usu, test, resultado):
+    
+    if resultado == True:
+        formulario_positivo = Formulario_Positivo()
+        contexto = {"title":"Resultado del AutoTest", "resultado":resultado, "form":formulario_positivo}
+    else:
+        contexto = {"title":"Resultado del AutoTest", "resultado":resultado}
+    
+    # Crea o substituye las cookies con el usuario y el test
+    response = render(request, "resultado.html", contexto)
+    response.set_cookie(key="usuario", value=usu)
+    response.set_cookie(key="test", value=test)
+
+    return response
+
+# Vista para el formulario secundario, si es positivo
+def positivo(request):
+
+    if request.method == "POST":
+        formulario_positivo = Formulario_Positivo(request.POST)
+
+        if formulario_positivo.is_valid():
+            infForm_positivo = formulario_positivo.cleaned_data
+            contactar = infForm_positivo['contactar']
+            telefono = infForm_positivo['telefono']
+
+            print(telefono)
+
+            if contactar == "Si" and telefono != "":
+                print("QUIERE CONTACTAR")
+                #
+                #
+                #
+            else:
+                print("NO QUIERE CONTACTAR")
+                #
+                #
+                #
+
+            return render(request, "index.html", {"title":"LLEGA, VALIDO"})
+        else:
+            return render(request, "index.html", {"title":"LLEGA, NO VALIDO"})
+        
+    else:
+        formulario_positivo = Formulario_Positivo()
+
+    return render(request, "resultado.html", {"title":"Resultado del AutoTest", "form":formulario_positivo})
+    
+
+def condiciones(request):
     return render(request, "condiciones.html", {"title":"Condiciones y políticas"})

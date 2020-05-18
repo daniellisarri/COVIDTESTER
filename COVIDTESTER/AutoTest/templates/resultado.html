@@ -1,0 +1,111 @@
+{% load static %}
+{% include 'superior.html' %}
+<!--
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+.______       _______      _______. __    __   __      .___________.     ___       _______    ______   
+|   _  \     |   ____|    /       ||  |  |  | |  |     |           |    /   \     |       \  /  __  \  
+|  |_)  |    |  |__      |   (----`|  |  |  | |  |     `---|  |----`   /  ^  \    |  .--.  ||  |  |  | 
+|      /     |   __|      \   \    |  |  |  | |  |         |  |       /  /_\  \   |  |  |  ||  |  |  | 
+|  |\  \----.|  |____ .----)   |   |  `--'  | |  `----.    |  |      /  _____  \  |  '--'  ||  `--'  | 
+| _| `._____||_______||_______/     \______/  |_______|    |__|     /__/     \__\ |_______/  \______/ 
+
+ Este archivo es la página a la que se llega tras realizar el AutoTest, independientemente 
+ del resultado.
+
+ Contiene: 
+ - 
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-->
+<style>
+    #id_edad {
+        -webkit-appearance: none;
+        background: #f8f8f8;
+        border-radius: 6px;
+        border: solid 1px #e5e5e5;
+        color: inherit;
+        display: block;
+        outline: 0;
+        padding: 0 1em;
+        text-decoration: none;
+        width: 100%;
+        height: 3em;
+    }
+    select {
+        background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), radial-gradient(#ddd 70%, transparent 72%);
+        background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) 0.5em;
+        background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+        background-repeat: no-repeat;
+    }
+    
+    select:focus {
+        background-image: linear-gradient(45deg, white 50%, transparent 50%), linear-gradient(135deg, transparent 50%, white 50%), radial-gradient(gray 70%, transparent 72%);
+        background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, calc(100% - .5em) 0.5em;
+        background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+        background-repeat: no-repeat;
+        border-color: green;
+        outline: 0;
+    }
+    
+</style>
+
+<section id="main" class="container 75%">
+    <header style="padding-top: 15em;">
+        <h2>
+            <strong style="color: #1A4883;">Resultado AutoTest</strong>
+        </h2>
+        {% if resultado == True %}
+            <h2>POSIBLE POSITIVO</h2>
+        {% else %}
+            <h2>NEGATIVO</h2>
+        {% endif %}
+    </header>
+    <div class="box" style="background-color: #EDF0F3;">
+        {% if resultado == True %}
+            <!--{{form.as_table}}-->
+            
+
+
+            <p>Es posible que haya contraído usted coronavirus. Si lo desea, puede ser usted contactado por personal sanitario.</p>
+            <form action="/positivo/" method="POST">{% csrf_token %}
+                <div class="row uniform 100%">
+                    <div class="12u 12u(mobilep)">
+                        <label for="id_contactar_0">Contactar:</label>
+                        <label for="id_contactar_0">
+                            Si <input type="radio" name="contactar" value="Si" required="required" id="id_contactar_0" style="opacity: 100%; margin-right: 0;">
+                        </label>
+                        <label for="id_contactar_1">
+                            No <input type="radio" name="contactar" value="No" required="required" id="id_contactar_1" style="opacity: 100%; margin-right: 0;">
+                        </label>
+                    </div>
+                </div>
+                <div class="row uniform 100%">
+                    <div class="12u 12u(mobilep)">
+                        <label for="id_telefono">Telefono:</label>
+                        <input type="text" name="telefono" placeholder="Teléfono con formato '000000000'" minlength="9" maxlength="9" id="id_telefono" pattern="(6|7)[ -]*([0-9][ -]*){8}">
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="12u">
+                        <ul class="actions align-center">
+                            <li><input type="submit" value="Enviar" style="background-color: #154481;"/></li>
+                            <li><input type="reset" value="Limpiar" style="background-color: #E2EEF6; color: #24536B;"/></li>
+                            <li>
+                                <a href="javascript:history.back()" style="color: #24536B;">Volver</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        {% else %}
+            <p>No parece que haya contraído usted coronavirus. A continuación se le redigirá a otra página en la que se explica cómo actuar ante la situación actual</p>
+        {% endif %}
+    </div>
+    <p style="text-align: center;">El uso de este servicio supone la aceptación de los términos y la política de privacidad descritos en
+    <a href="{% url 'condiciones' %}">'Ver las condiciones y políticas'</a></p>
+</section>
+
+{% include 'inferior.html' %}
