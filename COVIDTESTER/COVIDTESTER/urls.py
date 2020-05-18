@@ -30,7 +30,6 @@ urlpatterns = [
     path('index/', views.index, name="index"),
     path('AutoTest/', views.auto_Test, name="AutoTest"),
     path('condiciones/', views.condiciones, name="condiciones"),
-    path('pruebainfec/', views.prueba, name="prueba"),
 ]
 
 
