@@ -41,10 +41,14 @@ def auto_Test(request):
             #############
 
             # AQUÍ DECIDIMOS A DONDE REDIRIGIR, SI ES POSITIVO O NEGATIVO
-            #
-            #
-            #
-            return render(request, "index.html", {"title":"FORMULARIO ENVIADO"}) # Esta linea es para comprobar que funciona, pero sobra
+            #por ahora te redirije a un prueba.html porque aun no dispongo de los html de positivo y negativo (pendiente de cambio) Javi
+            #la condicion es verdadera si cualquiera de las variables del parentesis es true y si repentino es true, 
+            #si no se cumple te envia al index.html (pendiente de cambio cuando este el archivo negativo) Javi
+            if (perdida_sentidos or fiebre or tos_seca or asfixia) and repentino :
+                return render(request, "prueba.html", {"title": "infectado"})
+            else:
+                return render(request, "index.html", {"title": "no infectado"})
+            #return render(request, "index.html", {"title":"FORMULARIO ENVIADO"}) # Esta linea es para comprobar que funciona, pero sobra
     else:
         formulario = Formulario_AutoTest()
 
