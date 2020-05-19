@@ -57,17 +57,18 @@ select:focus {
     <header style="padding-top: 15em;">
         <h2>
             <strong style="color: #1A4883;">AutoTest COVID-19</strong>
+            {% if error %}
+                <p style="color: red;">{{error}}</p>
+            {% endif %}
         </h2>
         <p>Esta aplicación te permitirá hacer un seguimiento de la evolución de los síntomas y te dará las indicaciones y consejos a seguir en cada caso.</p>
-        <p>El uso de este servicio supone la aceptación de los términos y la política de privacidad descritos en</p>
-        <a href="{% url 'condiciones' %}">'Ver las condiciones y políticas'</a>
     </header>
     <div class="box" style="background-color: #EDF0F3;">
         <form action="/AutoTest/" method="POST">{% csrf_token %}
             <div class="row uniform 100%">
                 <div class="12u 12u(mobilep)">
                     <label for="id_cp">Código postal:</label>
-                    <input type="text" name="cp" placeholder="Código postal" maxlength="5" required="required" id="id_cp">
+                    <input type="text" name="cp" minlength="5" maxlength="5" required="required" id="id_cp" pattern="(?:0[1-9]|[1-4]\d|5[0-2])\d{3}" > <!-- pattern="(?:0[1-9]|[1-4]\d|5[0-2])\d{3}" -->
                 </div>
             </div>
             <div class="row uniform 100%">
@@ -78,8 +79,8 @@ select:focus {
                 <div class="6u 12u(mobilep)">
                     <label for="id_sexo">Sexo:</label>
                     <select name="sexo" id="id_sexo">
-                         <option value="Hombre">Hombre</option>
-                         <option value="Mujer">Mujer</option>
+                         <option value="H">Hombre</option>
+                         <option value="M">Mujer</option>
                     </select>
                 </div>
             </div>
@@ -136,6 +137,8 @@ select:focus {
             </div>
         </form>
     </div>
+    <p style="text-align: center;">El uso de este servicio supone la aceptación de los términos y la política de privacidad descritos en
+    <a href="{% url 'condiciones' %}">'Ver las condiciones y políticas'</a></p>
 </section>
 
 {% include 'inferior.html' %}

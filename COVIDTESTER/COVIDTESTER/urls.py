@@ -29,7 +29,9 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('index/', views.index, name="index"),
     path('AutoTest/', views.auto_Test, name="AutoTest"),
-    path('condiciones/', views.condiciones, name="condiciones"),
+    path('resultado/', views.resultado, name="resultado"), # Sobra o no? A ver, que no me aclaro
+    path('posible_positivo/', views.posible_positivo, name="posible_positivo"),
+    path('negativo/', views.negativo, name="negativo"),
 ]
 
 
