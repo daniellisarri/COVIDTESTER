@@ -15,7 +15,7 @@ class Usuario(models.Model):
         self.edad = edad
         self.sexo = sexo
         self.cp = cp
-        self.telefono = "__"
+        self.telefono = "__" # IS NONE #################################################################
 
     # Método para convertirlo en String
     def __str__(self):
@@ -29,7 +29,9 @@ class Test(models.Model):
     asfixia = models.BooleanField()
     perdida_sentidos = models.BooleanField()
     repentino = models.BooleanField()
-
+    # resultado = models.BooleanField() # Positivo = True
+    # id_usuario
+    
     # Método constructor
     def __init__(self, fiebre, tos_seca, asfixia, perdida_sentidos, repentino):
         self.fiebre = fiebre

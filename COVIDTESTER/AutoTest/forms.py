@@ -4,8 +4,7 @@ from django import forms
 class Formulario_AutoTest(forms.Form):
     cp = forms.CharField(
         max_length=5, 
-        widget=forms.TextInput({"placeholder":"Código postal con formato '00000'"}))
-        # validators="(?:0[1-9]|[1-4]\d|5[0-2])r\d{3}") # validators=["(?:0[1-9]|[1-4]\d|5[0-2])\d{3}"]
+        widget=forms.TextInput({"placeholder":"Código postal con formato '00000'"})) # validators="(?:0[1-9]|[1-4]\d|5[0-2])r\d{3}") # validators=["(?:0[1-9]|[1-4]\d|5[0-2])\d{3}"]
     edad = forms.IntegerField()
     sexo = forms.ChoiceField(choices=(("H","Hombre"),("M","Mujer")))
     fiebre = forms.BooleanField(required=False)
