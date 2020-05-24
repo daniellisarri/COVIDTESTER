@@ -6,7 +6,7 @@ class Formulario_AutoTest(forms.Form):
         max_length=5, 
         widget=forms.TextInput({"placeholder":"Código postal con formato '00000'"})) # validators="(?:0[1-9]|[1-4]\d|5[0-2])r\d{3}") # validators=["(?:0[1-9]|[1-4]\d|5[0-2])\d{3}"]
     edad = forms.IntegerField()
-    sexo = forms.ChoiceField(choices=(("H","Hombre"),("M","Mujer")))
+    sexo = forms.ChoiceField(choices=(("H","Hombre"),("M","Mujer"),("O","Otro")))
     fiebre = forms.BooleanField(required=False)
     tos_seca = forms.BooleanField(required=False)
     asfixia = forms.BooleanField(required=False)

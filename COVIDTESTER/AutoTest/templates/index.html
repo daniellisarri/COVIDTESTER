@@ -24,20 +24,43 @@
 -->
 
 <!-- Banner -->
-<section id="banner">
+<section id="banner" style="padding-top: 5em;">
     <h2>COVIDTESTER</h2>
     <p>Mediante un test online de diagnóstico y otras preguntas relacionadas tú mismo puedes hallar los primeros indicios de contagio por COVID-19.</p>
     <h3>Si tienes síntomas de coronavirus SARS CoV-2 o has estado en contacto con una persona afectada deberías hacer un control y seguimiento diario de tus síntomas.</h3>
     <p>Aquí puedes encontrar nuestro test online gratuito:</p>
     <ul class="actions">
         <li>
-            <a href="{% url 'AutoTest' %}" class="button special">Hacer test</a>
+            <a href="{% url 'preAutoTest' %}" class="button special">Hacer test</a>
         </li>
     </ul>
 </section>
 
+
+
 <!-- Main -->
-<section id="main" class="container">
+<section id="main" class="container" style="text-align: center; padding-top: 0;">
+    <table class="table table-hover table-dark" style=" font-size: 2em;">
+        <thead style="background-color: lightcyan;">
+            <tr>
+                <th scope="col" style="text-align: center;">Confirmados</th>
+                <th scope="col" style="text-align: center;">Hospitalizados</th>
+                <th scope="col" style="text-align: center;">Muertes</th>
+                <th scope="col" style="text-align: center;">Recuperados</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{confirmados}}</td>
+                <td>{{hospitalizados}}</td>
+                <td>{{muertes}}</td>
+                <td>{{recuperados}}</td>
+            </tr>
+            <tr style="color: yellow;">
+                <td colspan="4"><i>Información actualizada....</i></td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
 {% include 'inferior.html' %}

@@ -9,6 +9,8 @@ from AutoTest.models import Test, Usuario
 
 from AutoTest.forms import Formulario_AutoTest, Formulario_Positivo
 
+from AutoTest import recogida_datos
+
 # Create your views here.
 
 # Vista de inicio
@@ -17,7 +19,16 @@ from AutoTest.forms import Formulario_AutoTest, Formulario_Positivo
 #
 # Vista usual, recibe request
 def index(request):
-    return render(request, "index.html", {"title":"Inicio"})
+    datos = recogida_datos.recoger_datos()
+    datos["title"] = "AutoTest"
+
+    return render(request, "index.html", datos)
+
+#
+#
+#
+def pre_auto_Test(request):
+    return render(request, "preAutoTest.html", {"title":"AutoTest"})
 
 # Vista para formulario AutoTest
 #
@@ -145,4 +156,7 @@ def posible_positivo(request):
 def negativo(request):
     messages.info(request, "NEGATIVO")
     return render(request, "auxiliar.html", {"title":"Negativo"})
+
+def condiciones(request):
+    return render(request, "condiciones.html", {"title":"Condiciones y políticas"})
 

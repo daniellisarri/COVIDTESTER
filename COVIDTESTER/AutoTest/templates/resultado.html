@@ -15,7 +15,9 @@
  del resultado.
 
  Contiene: 
- - 
+ - Zona de estilos
+ - Header (dependiendo de resultado)
+ - Formulario (dependiendo de resultado)
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -57,9 +59,9 @@
             <strong style="color: #1A4883;">Resultado AutoTest</strong>
         </h2>
         {% if resultado == True %}
-            <h2>POSIBLE POSITIVO</h2>
+            <h2 style="color: green;">POSIBLE POSITIVO</h2>
         {% else %}
-            <h2>NEGATIVO</h2>
+            <h2 style="color: red;">NEGATIVO</h2>
         {% endif %}
     </header>
     <div class="box" style="background-color: #EDF0F3;">

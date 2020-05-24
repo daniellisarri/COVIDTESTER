@@ -15,7 +15,11 @@
  principal para el AutoTest. Carga contenido estático. Incluye cabecera y pié.
  
  Contiene:
- -
+ - Zona de estilos.
+ - Sección de contenido principal con:
+    · Header
+    · Formulario
+    · Enlace a condiciones.html
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -79,8 +83,10 @@ select:focus {
                 <div class="6u 12u(mobilep)">
                     <label for="id_sexo">Sexo:</label>
                     <select name="sexo" id="id_sexo">
+                         <option value="">--Selecciona--</option>
                          <option value="H">Hombre</option>
                          <option value="M">Mujer</option>
+                         <option value="O">Otro</option>
                     </select>
                 </div>
             </div>

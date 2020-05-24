@@ -1,0 +1,54 @@
+{% load static %}
+{% include 'superior.html' %}
+<!--
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+.______   .______       _______      ___       __    __  .___________.  ______   .___________. _______      _______..___________.
+|   _  \  |   _  \     |   ____|    /   \     |  |  |  | |           | /  __  \  |           ||   ____|    /       ||           |
+|  |_)  | |  |_)  |    |  |__      /  ^  \    |  |  |  | `---|  |----`|  |  |  | `---|  |----`|  |__      |   (----``---|  |----`
+|   ___/  |      /     |   __|    /  /_\  \   |  |  |  |     |  |     |  |  |  |     |  |     |   __|      \   \        |  |     
+|  |      |  |\  \----.|  |____  /  _____  \  |  `--'  |     |  |     |  `--'  |     |  |     |  |____ .----)   |       |  |     
+| _|      | _| `._____||_______|/__/     \__\  \______/      |__|      \______/      |__|     |_______||_______/        |__|       
+                                                                                                 
+ Este archivo es un PREVIO al formulario
+ principal para el AutoTest. Carga contenido estático. Incluye cabecera y pié.
+ 
+ Contiene:
+ - Sección de contenido principal con:
+    · Header
+    · Botón a AutoTest.html
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-->
+
+<section id="main" class="container 75%">
+    <header style="padding-top: 15em;">
+        <h2>
+            <strong style="color: #1A4883;">¿Estoy contagiado?</strong>
+        </h2>
+        <h3>Antes de hacer el test, nos gustaría informarte sobre el significado de sus posibles resultados:</h3>
+    </header>
+    
+    <div class="box" style="background-color: #EDF0F3;">
+        <h2 style="margin-bottom: 0;"><strong style="color: red;">Test positivo:</strong></h2>
+        <h3 style="margin-bottom: 0;">Puede que estés padeciendo COVID-19</h3>
+        <p>Se te ofrecerá la posibilidad de ser contactado por profesionales sanitarios.</p>
+    </div>
+
+    <div class="box" style="background-color: #EDF0F3; text-align: right;">
+        <h2 style="margin-bottom: 0;"><strong style="color: green;">Test negativo:</strong></h2>
+        <h3 style="margin-bottom: 0;">No podemos asegurar que no estés padeciendo COVID-19</h3>
+        <p>Si tus sintomas persisten o tu estado empeora, podrás desde esta misma página contactar con profesionales sanitarios.</p>
+    </div>
+
+    <p style="text-align: center;">El uso de este servicio supone la aceptación de los términos y la política de privacidad descritos en
+    <a href="{% url 'condiciones' %}">'Ver las condiciones y políticas'</a></p>
+
+    <div class="box" style="background-color: #EDF0F3; text-align: center;">
+        <input onclick="window.location.href = {% url 'AutoTest' %}" type="submit" value="Continuar" style="text-align: center; background-color: #154481;" />
+    </div>
+</section>
+
+{% include 'inferior.html' %}
