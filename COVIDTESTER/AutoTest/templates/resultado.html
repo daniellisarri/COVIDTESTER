@@ -53,42 +53,53 @@
     }
 </style>
 
+<script>
+    function si_contactar() {
+        document.getElementById("telefono").style.visibility = "visible";
+    }
+    function no_contactar() {
+        document.getElementById("telefono").style.visibility = "hidden";
+    }
+</script>
+
 <section id="main" class="container 75%">
     <header style="padding-top: 15em;">
         <h2>
-            <strong style="color: #1A4883;">Resultado AutoTest</strong>
+            <strong style="color: #1A4883;">¿Estoy contagiado?</strong>
         </h2>
         {% if resultado == True %}
-            <h2 style="color: green;">POSIBLE POSITIVO</h2>
+            <h3 style="color: red;">LA INFORMACIÓN QUE HAS APORTADO SUGIERE QUE ES POSIBLE QUE ESTÉ PADECIENDO COVID-19</h3>
+            <h1>¿Desea que contacten con usted profesionales sanitarios?</h1>
         {% else %}
-            <h2 style="color: red;">NEGATIVO</h2>
+            <h3 style="color: green;">LA INFORMACIÓN QUE HAS APORTADO NO SUGIERE QUE ES ESTÉ PADECIENDO COVID-19</h3>
         {% endif %}
     </header>
     <div class="box" style="background-color: #EDF0F3;">
         {% if resultado == True %}
-            <p>Es posible que haya contraído usted coronavirus. Si lo desea, puede ser usted contactado por personal sanitario.</p>
+            <p style="text-align: center;">Es posible que haya contraído usted coronavirus. Si lo desea, puede ser usted contactado por personal sanitario.</p>
             <form action="/posible_positivo/" method="POST">{% csrf_token %}
                 <div class="row uniform 100%">
                     <div class="12u 12u(mobilep)">
                         <label for="id_contactar_0">Contactar:</label>
                         <label for="id_contactar_0">
-                            Si <input type="radio" name="contactar" value="Si" required="required" id="id_contactar_0" style="opacity: 100%; margin-right: 0;">
+                            Si <input onclick="si_contactar()" type="radio" name="contactar" value="Si" required="required" id="id_contactar_0" style="opacity: 100%; margin-right: 0;">
                         </label>
                         <label for="id_contactar_1">
-                            No <input type="radio" name="contactar" value="No" required="required" id="id_contactar_1" style="opacity: 100%; margin-right: 0;">
+                            No <input onclick="no_contactar()" type="radio" name="contactar" value="No" required="required" id="id_contactar_1" style="opacity: 100%; margin-right: 0;">
                         </label>
                     </div>
                 </div>
-                <div class="row uniform 100%">
+                <div id="telefono" class="row uniform 100%" style="visibility: hidden;">
                     <div class="12u 12u(mobilep)">
                         <label for="id_telefono">Telefono:</label>
                         <input type="text" name="telefono" placeholder="Teléfono con formato '000000000'" minlength="9" maxlength="9" id="id_telefono" pattern="(6|7)[ -]*([0-9][ -]*){8}">
                     </div>
                 </div>
                 <div class="row uniform">
+                    <p style="margin-bottom: 0; text-align: center;">Agradecemos su colaboración. Con la información que ha aportado se elaborarán estdisticas para ayudar a combatir la pandemia.</p>
                     <div class="12u">
                         <ul class="actions align-center">
-                            <li><input type="submit" value="Enviar" style="background-color: #154481;"/></li>
+                            <li><input type="submit" value="Aceptar" style="background-color: #154481;"/></li>
                             <li><input type="reset" value="Limpiar" style="background-color: #E2EEF6; color: #24536B;"/></li>
                             <li>
                                 <a href="javascript:history.back()" style="color: #24536B;">Volver</a>
@@ -98,12 +109,13 @@
                 </div>
             </form>
         {% else %}
-            <p>No parece que haya contraído usted coronavirus. A continuación se le redigirá a otra página en la que se explica cómo actuar ante la situación actual</p>
+            <p style="text-align: center;">No parece que haya contraído usted coronavirus. <strong>A continuación se abrirá a otra página en la que se explica cómo actuar ante la situación actual.</strong></p>
+            <p style="text-align: center;">Agradecemos su colaboración. Con la información que ha aportado se elaborarán estdisticas para ayudar a combatir la pandemia.</p>
             <form action="/negativo/" method="POST">{% csrf_token %}
                 <div class="row uniform">
                     <div class="12u">
                         <ul class="actions align-center">
-                            <li><input type="submit" value="Redirigir" style="background-color: #154481;"/></li>
+                            <li><input type="submit" value="Aceptar" style="background-color: #154481;"/></li>
                             <li>
                                 <a href="javascript:history.back()" style="color: #24536B;">Volver</a>
                             </li>

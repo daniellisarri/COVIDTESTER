@@ -129,9 +129,6 @@ def posible_positivo(request):
             contactar = infForm_positivo['contactar']
             telefono = infForm_positivo['telefono']
 
-            # print(contactar) ########################
-            # print(telefono) ########################
-
             usu = request.COOKIES['usuario']
             test = request.COOKIES['test']
 
@@ -139,12 +136,18 @@ def posible_positivo(request):
             # GUARDAR LOS DATOS
             #
 
-            if contactar == "Si" and telefono != "__":
-                messages.info(request, "Se le contactará......")
+            if contactar == "Si" and telefono != "":
+                # messages.info(request, "Se le contactará......")
+                contacto = True
             else:
-                messages.info(request, "No se le contactará pero......")
+                # messages.info(request, "No se le contactará pero......")
+                contacto = False
 
-            return render(request, "auxiliar.html", {"title":"Posible positivo"}) # # # # # #
+            datos = recogida_datos.recoger_datos()
+            datos["title"] = "AutoTest"
+            datos["resultado"] = "positivo"
+            datos["contacto"] = contacto
+            return render(request, "index.html", datos)
 
         else:
             return render(request, "index.html", {"title":"LLEGA, NO VALIDO"})
@@ -154,8 +157,10 @@ def posible_positivo(request):
     return render(request, "resultado.html", {"title":"Resultado del AutoTest", "form":formulario_positivo})
 
 def negativo(request):
-    messages.info(request, "NEGATIVO")
-    return render(request, "auxiliar.html", {"title":"Negativo"})
+    datos = recogida_datos.recoger_datos()
+    datos["title"] = "AutoTest"
+    datos["resultado"] = "negativo"
+    return render(request, "index.html", datos)
 
 def condiciones(request):
     return render(request, "condiciones.html", {"title":"Condiciones y políticas"})

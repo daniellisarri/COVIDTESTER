@@ -9,14 +9,14 @@ class Usuario(models.Model):
     sexo = models.CharField(max_length=1)
     cp = models.CharField(max_length=5)
     telefono = models.CharField(max_length=9, null=True, blank=True) # min_lenght????
-    
+
     # Método constructor. Sin teléfono
     def __init__(self, edad, sexo, cp):
         self.edad = edad
         self.sexo = sexo
         self.cp = cp
-        self.telefono = "__" # IS NONE #################################################################
-
+        self.telefono = "" # IS NONE #################################################################
+    
     # Método para convertirlo en String
     def __str__(self):
         return "Edad: " + str(self.edad) + ", Sexo: " + self.sexo + ", CP:" + self.cp + ", Teléfono: " + self.telefono
