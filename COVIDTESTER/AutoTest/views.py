@@ -11,6 +11,9 @@ from AutoTest.forms import Formulario_AutoTest, Formulario_Positivo
 
 from AutoTest import recogida_datos
 
+from django.core.files import File
+
+import os
 # Create your views here.
 
 # Vista de inicio
@@ -49,14 +52,36 @@ def auto_Test(request):
         if formulario_autotest.is_valid():
             # Si el formulario es válido comprueba resultado y se pasa a la vista resultado
             infForm_autotest = formulario_autotest.cleaned_data
+
             cp = infForm_autotest['cp']
             edad = infForm_autotest['edad']
             sexo = infForm_autotest['sexo']
+
             fiebre = infForm_autotest['fiebre']
             tos_seca = infForm_autotest['tos_seca']
             asfixia = infForm_autotest['asfixia']
             perdida_sentidos = infForm_autotest['perdida_sentidos']
             repentino = infForm_autotest['repentino']
+
+            ###
+            ###
+            ###
+            cp_correcto = False
+            fichero_cp = open(os.getcwd()+"\AutoTest\static\CP", "r")
+            while not cp_correcto:
+                linea = fichero_cp.readline().rstrip("\n")
+                if linea==cp:
+                    cp_correcto = True
+                    break
+                if not linea:
+                    break
+            fichero_cp.close()
+
+            if not cp_correcto:
+                return render(request, "AutoTest.html", {"title":"AutoTest", "error":"Se ha producido un error", "form":formulario_autotest})
+            ###
+            ###
+            ###
 
             usu = Usuario(edad, sexo, cp)
             test = Test(fiebre, tos_seca, asfixia, perdida_sentidos, repentino)
