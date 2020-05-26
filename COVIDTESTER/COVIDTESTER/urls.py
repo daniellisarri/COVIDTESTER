@@ -23,7 +23,6 @@ from AutoTest import views
 ### Añadir direccion positivo
 ### Añadir direccion negativo
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),

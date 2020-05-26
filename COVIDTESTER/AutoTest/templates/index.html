@@ -49,9 +49,9 @@
 </section>
 
 <!-- Main -->
-<section id="main" class="container" style="text-align: center; padding-top: 0;">
-    <table class="table table-hover table-dark" style=" font-size: 2em;">
-        <thead style="background-color: lightcyan;">
+<section id="main" class="container" style="text-align: center; padding-top: 0; padding-bottom: 0;">
+    <table class="table table-hover table-dark" > <!-- style="font-size: 2em;" QUE PASA CON EL BORDER-RADIUS?????? -->
+        <thead style="background-color: #EDF0F3;">
             <tr>
                 <th scope="col" style="text-align: center;">Confirmados</th>
                 <th scope="col" style="text-align: center;">Hospitalizados</th>
@@ -67,7 +67,7 @@
                 <td>{{recuperados}}</td>
             </tr>
             <tr style="color: yellow;">
-                <td colspan="4"><i>Información actualizada....</i></td>
+                <td colspan="4"><i>Información del Ministerio de Sanidad Gobierno de España, datos de Navarra. Última actualización: {{fecha_actualizacion}}</i></td>
             </tr>
         </tbody>
     </table>
