@@ -14,6 +14,7 @@ from AutoTest import recogida_datos
 from django.core.files import File
 
 import os
+
 # Create your views here.
 
 # Vista de inicio

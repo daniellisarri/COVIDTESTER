@@ -7,8 +7,6 @@ def recoger_datos():
     fecha_formateada = fecha.strftime("%Y-%m-%d")
 
     url = 'https://api.covid19tracking.narrativa.com/api/'+fecha_formateada+'/country/spain/region/navarra'
-
-    print(url)
     
     response = requests.get(url)
     
