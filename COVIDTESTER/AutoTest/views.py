@@ -28,9 +28,11 @@ def index(request):
 
     return render(request, "index.html", datos)
 
+# Vista antetrior al formulario AutoTest
 #
-#
-#
+# Sólo renderiza el archivo preAutoTest.html y le pása el titulo mediante el conexto
+# 
+# Vista usuarl, recibe request
 def pre_auto_Test(request):
     return render(request, "preAutoTest.html", {"title":"AutoTest"})
 
@@ -64,9 +66,7 @@ def auto_Test(request):
             perdida_sentidos = infForm_autotest['perdida_sentidos']
             repentino = infForm_autotest['repentino']
 
-            ###
-            ###
-            ###
+            # Comprueba que el código posta es correcto comparandolo con una lista
             cp_correcto = False
             fichero_cp = open(os.getcwd()+"\AutoTest\static\CP", "r")
             while not cp_correcto:
@@ -80,10 +80,8 @@ def auto_Test(request):
 
             if not cp_correcto:
                 return render(request, "AutoTest.html", {"title":"AutoTest", "error":"Se ha producido un error", "form":formulario_autotest})
-            ###
-            ###
-            ###
 
+            # Crea los objetos para introducción en base de datos más adelante
             usu = Usuario(edad, sexo, cp)
             test = Test(fiebre, tos_seca, asfixia, perdida_sentidos, repentino)
 
@@ -182,24 +180,33 @@ def posible_positivo(request):
 
     return render(request, "resultado.html", {"title":"Resultado del AutoTest", "form":formulario_positivo})
 
+# Vista para mostrar resultado negativo y datos en index.html
 #
-#
-#
+# Sólo renderiza el archivo index.html y le pása el titulo mediante el conexto, así como los datos recogidos
+# 
+# Vista usuarl, recibe request
 def negativo(request):
     datos = recogida_datos.recoger_datos()
     datos["title"] = "AutoTest"
     datos["resultado"] = "negativo"
     return render(request, "index.html", datos)
 
+# Vista para mostrar documento de condiciones y políticas.
 #
-#
-#
+# Sólo renderiza el archivo condiciones.html y le pása el titulo mediante el conexto
+# 
+# Vista usuarl, recibe request
 def condiciones(request):
     return render(request, "condiciones.html", {"title":"Condiciones y políticas"})
 
+# Vista para formulario de contacto
 #
+# 1. Renderiza el archivo "contacto.html", pasando el formulario de contacto, título y un
+#   mensaje de error en caso necesario mediante contexto. 
+# 2. Si se ha completado el formulario sin problemas, envía un email
+# 3. Regresa a index.html pasando un mensaje
 #
-#
+# Vista usual, recibe request
 def contacto(request):
     # Comprueba si ha llegado mediante POST
     if request.method=="POST":
@@ -217,9 +224,7 @@ def contacto(request):
             email = infForm_contacto['email']
             telefono = infForm_contacto['telefono']
 
-            ###
-            ###
-            ###
+            # Comprueba que el código posta es correcto comparandolo con una lista
             cp_correcto = False
             fichero_cp = open(os.getcwd()+"\AutoTest\static\CP", "r")
             while not cp_correcto:
@@ -233,9 +238,6 @@ def contacto(request):
 
             if not cp_correcto:
                 return render(request, "contacto.html", {"title":"Contactar", "error":"Se ha producido un error", "form":formulario_contacto})
-            ###
-            ###
-            ###
 
             # ENVIAR EMAIL
             # ENVIAR EMAIL
