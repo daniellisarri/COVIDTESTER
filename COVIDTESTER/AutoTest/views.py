@@ -211,9 +211,11 @@ def contacto(request):
             # Si el formulario es válido comprueba resultado y se pasa a la vista resultado
             infForm_contacto = formulario_contacto.cleaned_data
 
-            print(infForm_contacto)
-
             cp = infForm_contacto['cp']
+            edad = infForm_contacto['edad']
+            sexo = infForm_contacto['sexo']
+            email = infForm_contacto['email']
+            telefono = infForm_contacto['telefono']
 
             ###
             ###
@@ -230,16 +232,20 @@ def contacto(request):
             fichero_cp.close()
 
             if not cp_correcto:
-                return render(request, "AutoTest.html", {"title":"AutoTest", "error":"Se ha producido un error", "form":formulario_autotest})
+                return render(request, "contacto.html", {"title":"Contactar", "error":"Se ha producido un error", "form":formulario_contacto})
             ###
             ###
             ###
 
+            # ENVIAR EMAIL
+            # ENVIAR EMAIL
+            # ENVIAR EMAIL
+            # ENVIAR EMAIL
+
             # Pasa a la vista index pasando mensaje
             datos = recogida_datos.recoger_datos()
             datos["title"] = "AutoTest"
-            datos["resultado"] = "positivo"
-            datos["contacto"] = contacto
+            datos["contactar_enviado"] = True
             return render(request, "index.html", datos)
         
         else:

@@ -37,10 +37,12 @@
         <p>En la nueva página que se le ha abierto puede ver consejos sobre como actuar.</p>
         <p>Si usted u otra persona desea realizar el test de nuevo puede hacerlo aquí: </p>
     {% else %}
+        {% if contactar_enviado == True %}
+            <h3 style="color: red;">Profesionales sanitarios contactarán con usted lo antes posible.</h3>
+        {% endif %}
         <h3>Si tienes síntomas de coronavirus SARS CoV-2 o has estado en contacto con una persona afectada deberías hacer un control y seguimiento diario de tus síntomas.</h3>
         <p>Aquí puedes encontrar nuestro test online gratuito:</p>
     {% endif %}
-    
     <ul class="actions">
         <li>
             <a href="{% url 'preAutoTest' %}" class="button special">Hacer test</a>
