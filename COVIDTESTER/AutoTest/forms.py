@@ -21,3 +21,15 @@ class Formulario_Positivo(forms.Form):
     telefono = forms.CharField(
         required=False, 
         widget=forms.TextInput({"placeholder":"Teléfono con formato '000000000'"}))
+
+# Formulario de contacto
+class Formulario_Contacto(forms.Form):
+    cp = forms.CharField(
+        max_length=5, 
+        widget=forms.TextInput({"placeholder":"Código postal con formato '00000'"})) 
+    edad = forms.IntegerField()
+    sexo = forms.ChoiceField(choices=(("H","Hombre"),("M","Mujer"),("O","Otro")))
+    email = forms.EmailField()
+    telefono = forms.CharField(
+        required=False, 
+        widget=forms.TextInput({"placeholder":"Teléfono con formato '000000000'"}))

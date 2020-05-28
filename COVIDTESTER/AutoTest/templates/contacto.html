@@ -4,22 +4,17 @@
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
-     ___       __    __  .___________.  ______   .___________. _______      _______..___________.
-    /   \     |  |  |  | |           | /  __  \  |           ||   ____|    /       ||           |
-   /  ^  \    |  |  |  | `---|  |----`|  |  |  | `---|  |----`|  |__      |   (----``---|  |----`
-  /  /_\  \   |  |  |  |     |  |     |  |  |  |     |  |     |   __|      \   \        |  |     
- /  _____  \  |  `--'  |     |  |     |  `--'  |     |  |     |  |____ .----)   |       |  |     
-/__/     \__\  \______/      |__|      \______/      |__|     |_______||_______/        |__|     
-                                                                                                 
- Este archivo contiene el formulario
- principal para el AutoTest. Carga contenido estático. Incluye cabecera y pié.
- 
- Contiene:
- - Zona de estilos.
- - Sección de contenido principal con:
-    · Header
-    · Formulario
-    · Enlace a condiciones.html
+  ______   ______   .__   __. .___________.     ___        ______ .___________.  ______   
+ /      | /  __  \  |  \ |  | |           |    /   \      /      ||           | /  __  \  
+|  ,----'|  |  |  | |   \|  | `---|  |----`   /  ^  \    |  ,----'`---|  |----`|  |  |  | 
+|  |     |  |  |  | |  . `  |     |  |       /  /_\  \   |  |         |  |     |  |  |  | 
+|  `----.|  `--'  | |  |\   |     |  |      /  _____  \  |  `----.    |  |     |  `--'  | 
+ \______| \______/  |__| \__|     |__|     /__/     \__\  \______|    |__|      \______/ 
+
+ Este archivo...
+
+ Contiene: 
+ - 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -59,16 +54,15 @@
 <section id="main" class="container 75%">
     <header style="padding-top: 15em;">
         <h2>
-            <strong style="color: #1A4883;">AutoTest COVID-19</strong>
+            <strong style="color: #1A4883;">Formulario de contacto</strong>
             {% if error %}
                 <p style="color: red;">{{error}}</p>
             {% endif %}
         </h2>
-        <p>Esta aplicación te permitirá hacer un seguimiento de la evolución de los
-            síntomas y te dará las indicaciones y consejos a seguir en cada caso.</p>
+        <p>Mediante este formulario podrá aportar los datos necesarios para poder contactar con profesionales sanitarios.</p>
     </header>
     <div class="box" style="background-color: #EDF0F3;">
-        <form action="/AutoTest/" method="POST">{% csrf_token %}
+        <form action="/contacto/" method="POST">{% csrf_token %}
             <div class="row uniform 100%">
                 <div class="12u 12u(mobilep)">
                     <label for="id_cp">Código postal:</label>
@@ -80,7 +74,6 @@
                         required="required"
                         id="id_cp"
                         pattern="\d\d\d\d\d">
-                    <!-- (?:0[1-9]|[1-4]\d|5[0-2])\d{3} pattern="(?:0[1-9]|[1-4]\d|5[0-2])\d{3}" -->
                 </div>
             </div>
             <div class="row uniform 100%">
@@ -99,63 +92,13 @@
                 </div>
             </div>
             <div class="row uniform 100%">
-                <div class="12u 12u(mobilep)" style="text-align: center;">
-                    <h4>Indique si ha padecido alguno de los sigientes síntomas, y en caso de
-                        haberlos padecido, indique si fué de manera repentina:</h4>
+                <div class="6u 12u(mobilep)">
+                    <label for="id_email">Email:</label>
+                    <input type="email" name="email" required id="id_email">
                 </div>
-            </div>
-            <div class="row uniform 100%">
-                <div class="3u 12u(mobilep)">
-                    <label for="id_fiebre">
-                        <input
-                            type="checkbox"
-                            name="fiebre"
-                            id="id_fiebre"
-                            style="opacity: 100%; margin-right: 0;">
-                        <span>Fiebre</span>
-                    </label>
-                </div>
-                <div class="3u 12u(mobilep)">
-                    <label for="id_tos_seca">
-                        <input
-                            type="checkbox"
-                            name="tos_seca"
-                            id="id_tos_seca"
-                            style="opacity: 100%; margin-right: 0;">
-                        <span>Tos seca</span>
-                    </label>
-                </div>
-                <div class="3u 12u(mobilep)">
-                    <label for="id_asfixia">
-                        <input
-                            type="checkbox"
-                            name="asfixia"
-                            id="id_asfixia"
-                            style="opacity: 100%; margin-right: 0;">
-                        <span>Asfixia</span>
-                    </label>
-                </div>
-                <div class="3u 12u(mobilep)">
-                    <label for="id_perdida_sentidos">
-                        <input
-                            type="checkbox"
-                            name="perdida_sentidos"
-                            id="id_perdida_sentidos"
-                            style="opacity: 100%; margin-right: 0;">
-                        <span>Perdida del gusto</span>
-                    </label>
-                </div>
-            </div>
-            <div class="row uniform 100%">
-                <div class="3u 12u(mobilep)">
-                    <label for="id_repentino">
-                        <input
-                            type="checkbox"
-                            name="repentino"
-                            id="id_repentino"
-                            style="opacity: 100%; margin-right: 0;">
-                        <span>¿Ha sido repentino?</span>
-                    </label>
+                <div class="6u 12u(mobilep)">
+                    <label for="id_telefono">Telefono:</label>
+                    <input type="text" name="telefono" placeholder="Teléfono con formato &#x27;000000000&#x27;" id="id_telefono">
                 </div>
             </div>
             <div class="row uniform">

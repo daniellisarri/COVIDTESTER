@@ -33,4 +33,5 @@ urlpatterns = [
     path('condiciones/', views.condiciones, name="condiciones"), 
     path('posible_positivo/', views.posible_positivo, name="posible_positivo"),
     path('negativo/', views.negativo, name="negativo"),
+    path('contacto/', views.contacto, name="contacto"),
 ]

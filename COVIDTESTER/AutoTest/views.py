@@ -7,7 +7,7 @@ from django.contrib import messages
 
 from AutoTest.models import Test, Usuario
 
-from AutoTest.forms import Formulario_AutoTest, Formulario_Positivo
+from AutoTest.forms import Formulario_AutoTest, Formulario_Positivo, Formulario_Contacto
 
 from AutoTest import recogida_datos
 
@@ -182,12 +182,73 @@ def posible_positivo(request):
 
     return render(request, "resultado.html", {"title":"Resultado del AutoTest", "form":formulario_positivo})
 
+#
+#
+#
 def negativo(request):
     datos = recogida_datos.recoger_datos()
     datos["title"] = "AutoTest"
     datos["resultado"] = "negativo"
     return render(request, "index.html", datos)
 
+#
+#
+#
 def condiciones(request):
     return render(request, "condiciones.html", {"title":"Condiciones y políticas"})
 
+#
+#
+#
+def contacto(request):
+    # Comprueba si ha llegado mediante POST
+    if request.method=="POST":
+        # Si he llegado mediante POST (tras hacer el formulario), recoge el formulario 
+        formulario_contacto = Formulario_Contacto(request.POST)
+
+        # Comprueba que el formulario sea válido
+        if formulario_contacto.is_valid():
+            # Si el formulario es válido comprueba resultado y se pasa a la vista resultado
+            infForm_contacto = formulario_contacto.cleaned_data
+
+            print(infForm_contacto)
+
+            cp = infForm_contacto['cp']
+
+            ###
+            ###
+            ###
+            cp_correcto = False
+            fichero_cp = open(os.getcwd()+"\AutoTest\static\CP", "r")
+            while not cp_correcto:
+                linea = fichero_cp.readline().rstrip("\n")
+                if linea==cp:
+                    cp_correcto = True
+                    break
+                if not linea:
+                    break
+            fichero_cp.close()
+
+            if not cp_correcto:
+                return render(request, "AutoTest.html", {"title":"AutoTest", "error":"Se ha producido un error", "form":formulario_autotest})
+            ###
+            ###
+            ###
+
+            # Pasa a la vista index pasando mensaje
+            datos = recogida_datos.recoger_datos()
+            datos["title"] = "AutoTest"
+            datos["resultado"] = "positivo"
+            datos["contacto"] = contacto
+            return render(request, "index.html", datos)
+        
+        else:
+            # Si el formulario no es válido, regresa a AutoTest con un mensaje de error
+            return render(request, "contacto.html", {"title":"Contactar", "error":"Se ha producido un error", "form":formulario_contacto})
+        
+    else:
+        # Si ha llegado mediante GET, crea el formulario de cero
+        formulario_contacto = Formulario_Contacto()
+
+    # Retorna el renderizado básico de AutoTest
+    return render(request, "contacto.html", {"title":"Contactar", "form":formulario_contacto})
