@@ -19,27 +19,28 @@ class Usuario(models.Model):
     
     # Método para convertirlo en String
     def __str__(self):
-        return "Edad: " + str(self.edad) + ", Sexo: " + self.sexo + ", CP:" + self.cp + ", Teléfono: " + self.telefono
+        return "Edad: " + str(self.edad) + ", Sexo: " + str(self.sexo) + ", CP:" + str(self.cp) + ", Teléfono: " + str(self.telefono)
 
 ### Modelo Formulario
 # Contiene los síntomas en campos booleanos
 class Test(models.Model):
+    usuario = models.ForeignKey(Usuario, default=None, on_delete=models.CASCADE)
     fiebre = models.BooleanField()
     tos_seca = models.BooleanField()
     asfixia = models.BooleanField()
     perdida_sentidos = models.BooleanField()
     repentino = models.BooleanField()
-    # resultado = models.BooleanField() # Positivo = True
-    # id_usuario
+    resultado = models.BooleanField()
     
     # Método constructor
-    def __init__(self, fiebre, tos_seca, asfixia, perdida_sentidos, repentino):
+    def __init__(self, fiebre, tos_seca, asfixia, perdida_sentidos, repentino, resultado):
         self.fiebre = fiebre
         self.tos_seca = tos_seca
         self.asfixia = asfixia
         self.perdida_sentidos = perdida_sentidos
         self.repentino = repentino
+        self.resultado = resultado
     
     # Método para convertirlo en String
     def __str__(self):
-        return "Fiebre: " + str(self.fiebre) + ", Tos seca: " + str(self.tos_seca) + ", Asfixia: " + str(self.asfixia) + ", Perdida sentidos: " + str(self.perdida_sentidos) + ", Repentino: " + str(self.repentino)
+        return "Fiebre: " + str(self.fiebre) + ", Tos seca: " + str(self.tos_seca) + ", Asfixia: " + str(self.asfixia) + ", Perdida sentidos: " + str(self.perdida_sentidos) + ", Repentino: " + str(self.repentino) + ", Resultado: " + str(self.resultado)

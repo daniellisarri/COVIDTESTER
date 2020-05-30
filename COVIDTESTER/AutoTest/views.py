@@ -81,15 +81,15 @@ def auto_Test(request):
             if not cp_correcto:
                 return render(request, "AutoTest.html", {"title":"AutoTest", "error":"Se ha producido un error", "form":formulario_autotest})
 
-            # Crea los objetos para introducción en base de datos más adelante
-            usu = Usuario(edad, sexo, cp)
-            test = Test(fiebre, tos_seca, asfixia, perdida_sentidos, repentino)
-
             # Determina Positivo/Negativo
             if (perdida_sentidos or fiebre or tos_seca or asfixia) and repentino:
                 res = True
             else:
                 res = False
+            
+            # Crea los objetos para introducción en base de datos más adelante
+            usu = Usuario(edad, sexo, cp)
+            test = Test(fiebre, tos_seca, asfixia, perdida_sentidos, repentino, res)
 
             # Pasa a la vista resultado, pasando datos de usuario, test y resultado
             return resultado(request, usu, test, res)
