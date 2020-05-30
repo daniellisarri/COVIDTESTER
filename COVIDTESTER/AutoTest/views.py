@@ -88,8 +88,21 @@ def auto_Test(request):
                 res = False
             
             # Crea los objetos para introducción en base de datos más adelante
-            usu = Usuario(edad, sexo, cp)
-            test = Test(fiebre, tos_seca, asfixia, perdida_sentidos, repentino, res)
+            #usu = Usuario(edad, sexo, cp)
+            #test = Test(fiebre, tos_seca, asfixia, perdida_sentidos, repentino, res)
+            usu = {
+                "edad":edad,
+                "sexo":sexo,
+                "cp":cp
+            }
+            test = {
+                "fiebre":fiebre,
+                "tos_seca":tos_seca,
+                "asfixia":asfixia,
+                "perdida_sentidos":perdida_sentidos,
+                "repentino":repentino,
+                "res":res
+            }
 
             # Pasa a la vista resultado, pasando datos de usuario, test y resultado
             return resultado(request, usu, test, res)
@@ -153,11 +166,20 @@ def posible_positivo(request):
             contactar = infForm_positivo['contactar']
             telefono = infForm_positivo['telefono']
 
+            #
+            # Objetos JSON
+            # Hay que introducir el teléfono en el usuario (si quiere ser contactad@),
+            # transformarlo a los objetos del models.py,
+            # y finalmente introducirlos en la base de datos
+            #
             usu = request.COOKIES['usuario']
             test = request.COOKIES['test']
 
+            print("USUARIO------->" + usu)
+            print("TEST---------->" + test)
+
             #
-            # GUARDAR LOS DATOS
+            # GUARDAR LOS OBJETOS EN BBDD
             #
 
             if contactar == "Si" and telefono != "":
@@ -186,6 +208,22 @@ def posible_positivo(request):
 # 
 # Vista usuarl, recibe request
 def negativo(request):
+
+    #
+    # Objetos JSON
+    # Hay que transformarlo a los objetos del models.py,
+    # y finalmente introducirlos en la base de datos
+    #
+    usu = request.COOKIES['usuario']
+    test = request.COOKIES['test']
+
+    print("USUARIO------->" + usu)
+    print("TEST---------->" + test)
+
+    #
+    # GUARDAR LOS OBJETOS EN BBDD
+    #
+
     datos = recogida_datos.recoger_datos()
     datos["title"] = "AutoTest"
     datos["resultado"] = "negativo"
