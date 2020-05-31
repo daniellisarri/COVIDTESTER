@@ -26,8 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STATICFILES_DIRS = [ # Directorio estático
-    "C:/Users/danie/OneDrive/Escritorio/COVIDTESTER_LOCAL/COVIDTESTER/AutoTest/static",
+STATICFILES_DIRS = [ 
+    "C:/Users/danie/OneDrive/Escritorio/COVIDTESTER_LOCAL/COVIDTESTER/AutoTest/static", # Directorio estático
 ]
 
 # Application definition
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'COVIDTESTER.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/danie/OneDrive/Escritorio/COVIDTESTER_LOCAL/COVIDTESTER/AutoTest/templates"],
+        'DIRS': ["C:/Users/danie/OneDrive/Escritorio/COVIDTESTER_LOCAL/COVIDTESTER/AutoTest/templates"], # Directorio de plantillas
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,7 +122,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/' # IMPORTANTE para archivos estáticos
 
-# PARÁMETROS DE CONFIGURACIÓN SMTP
+# Parámetros de configuración del protocolo SMTP
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True

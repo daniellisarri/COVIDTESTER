@@ -16,13 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# Importación de vistas
 from AutoTest import views
 
-### Añadir direccion index
-### Añadir direccion formulario AutoTest
-### Añadir direccion positivo
-### Añadir direccion negativo
-
+# Un path por cada vista, + path vacío + admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
