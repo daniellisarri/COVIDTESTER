@@ -15,6 +15,9 @@ from django.core.files import File
 
 import os
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 # Create your views here.
 
 # Vista de inicio
@@ -278,9 +281,9 @@ def contacto(request):
                 return render(request, "contacto.html", {"title":"Contactar", "error":"Se ha producido un error", "form":formulario_contacto})
 
             # ENVIAR EMAIL
-            # ENVIAR EMAIL
-            # ENVIAR EMAIL
-            # ENVIAR EMAIL
+            #asunto = 
+            #email_from = settings.EMAIL_HOST_USER
+            #send_mail("Prueba SMTP", "MENSAJEEEE", "COVIDTESTER.0@gmail.com", ["daniel.lisarri.ihs@gmail.com"], fail_silently=False)
 
             # Pasa a la vista index pasando mensaje
             datos = recogida_datos.recoger_datos()

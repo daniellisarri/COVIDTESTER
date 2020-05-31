@@ -24,6 +24,7 @@ class Formulario_Positivo(forms.Form):
 
 # Formulario de contacto
 class Formulario_Contacto(forms.Form):
+    asunto = forms.TextInput({"placeholder":"Asunto"})
     cp = forms.CharField(
         max_length=5, 
         widget=forms.TextInput({"placeholder":"Código postal con formato '00000'"})) 

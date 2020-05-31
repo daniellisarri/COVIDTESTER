@@ -67,8 +67,14 @@
         <form action="/contacto/" method="POST">{% csrf_token %}
             <div class="row uniform 100%">
                 <div class="12u 12u(mobilep)">
+                    <label for="id_asunto">Asunto:</label>
+                    <input type="text" name="asunto" placeholder="Asunto" required="required" id="id_asunto" >
+                </div>
+            </div>
+            <div class="row uniform 100%">
+                <div class="12u 12u(mobilep)">
                     <label for="id_cp">Código postal:</label>
-                    <input type="text" name="cp" minlength="5" maxlength="5" required="required" id="id_cp" pattern="\d\d\d\d\d">
+                    <input type="text" name="cp" placeholder="Código postal con formato '00000'" minlength="5" maxlength="5" required="required" id="id_cp" pattern="\d\d\d\d\d">
                 </div>
             </div>
             <div class="row uniform 100%">
@@ -89,7 +95,7 @@
             <div class="row uniform 100%">
                 <div class="6u 12u(mobilep)">
                     <label for="id_email">Email:</label>
-                    <input type="email" name="email" required id="id_email">
+                    <input type="email" name="email" placeholder="Email con formato 'xxxx@xxx.xx'"  required id="id_email">
                 </div>
                 <div class="6u 12u(mobilep)">
                     <label for="id_telefono">Telefono:</label>
