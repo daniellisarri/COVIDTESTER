@@ -259,6 +259,9 @@ def contacto(request):
             # Si el formulario es válido comprueba resultado y se pasa a la vista resultado
             infForm_contacto = formulario_contacto.cleaned_data
 
+            #print(infForm_contacto)
+
+            asunto = infForm_contacto['asunto']
             cp = infForm_contacto['cp']
             edad = infForm_contacto['edad']
             sexo = infForm_contacto['sexo']
@@ -279,11 +282,21 @@ def contacto(request):
 
             if not cp_correcto:
                 return render(request, "contacto.html", {"title":"Contactar", "error":"Se ha producido un error", "form":formulario_contacto})
-
+            
             # ENVIAR EMAIL
-            #asunto = 
-            #email_from = settings.EMAIL_HOST_USER
-            #send_mail("Prueba SMTP", "MENSAJEEEE", "COVIDTESTER.0@gmail.com", ["daniel.lisarri.ihs@gmail.com"], fail_silently=False)
+            # asunto 
+            mensaje = "Una persona con los siguientes datos quiere ponerse en contacto con profesionales sanitarios: \n" \
+                        "Código postal: " + str(cp) + "\n" \
+                        "Edad: " + str(edad) + "\n" \
+                        "Sexo: " + str(sexo) + "\n" \
+                        "Email: " + str(email) + "\n" \
+                        "Teléfono: " + str(telefono) + "\n\n" \
+                       "Conforme al siguiente asunto: \n" \
+                        "Asunto: " + str(asunto)
+            
+            email_from = settings.EMAIL_HOST_USER
+            lista_destinatarios = ["COVIDTESTER.0@gmail.com"]
+            send_mail(asunto, mensaje, email_from, lista_destinatarios) # , fail_silently=False
 
             # Pasa a la vista index pasando mensaje
             datos = recogida_datos.recoger_datos()
