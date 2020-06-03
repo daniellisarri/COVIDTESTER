@@ -146,19 +146,18 @@ def posible_positivo(request):
             contactar = infForm_positivo['contactar']
             telefono = infForm_positivo['telefono']
 
-            #
-            # Recibe STRINGS
-            # Hay que introducir el teléfono en el usuario (si quiere ser contactad@),
-            # transformarlo a los objetos del models.py,
-            # y finalmente introducirlos en la base de datos utilizando el módulo gestor externo
-            #
+
+            # primero recogemos los datos del usuario de la cookie
             usu = str(request.COOKIES['usuario'])
+            # despues en las variables guardamos los datos introducidos en el formulario
             sexo = usu.split("#", 2)[1]
             edad = usu.split("#", 1)[0]
             cp = usu.split("#", 3)[2]
-            usu_final = Usuario(0, edad, sexo, cp, telefono)
-            gestorBD.insertar_Usuario(usu_final)
+            alberto_final = Usuario(0, edad, sexo, cp, telefono)
+            # con los datos gurdados en alberto_final llamamos al metodo de isnertar_Usuario
+            gestorBD.insertar_Usuario(alberto_final)
 
+            # mismo proceso pero con los datos del test
             test = str(request.COOKIES['test'])
             fiebre = test.split("#", 1)[0]
             tos_seca = test.split("#", 2)[1]
@@ -198,18 +197,15 @@ def posible_positivo(request):
 # 
 # Vista usuarl, recibe request
 def negativo(request):
-    #
-    # Recibe STRINGS
-    # Hay que transformarlo a los objetos del models.py,
-    # y finalmente introducirlos en la base de datos utilizando el módulo gestor externo
-    #
+    # el mismo proceso que hacemos en positivo
     usu = str(request.COOKIES['usuario'])
     cp = usu.split("#", 3)[2]
     edad = usu.split("#", 1)[0]
     sexo = usu.split("#", 2)[1]
-    usu_final = Usuario(0, edad, sexo, cp, "")
-    gestorBD.insertar_Usuario(usu_final)
+    alberto_final = Usuario(0, edad, sexo, cp, "")
+    gestorBD.insertar_Usuario(alberto_final)
 
+    # el mismo proceso que hacemos en positivo
     test = str(request.COOKIES['test'])
     fiebre = test.split("#", 1)[0]
     tos_seca = test.split("#", 2)[1]

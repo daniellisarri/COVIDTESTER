@@ -3,13 +3,15 @@ from AutoTest.models import Test, Usuario
 from django.shortcuts import render
 import sqlite3
 
+#metodo devuelve una conexion para la base de datos
 def conectar():
     cn = sqlite3.connect("db.sqlite3")
     return cn
-
+#metodo cierra la conexion con la BD
 def desconectar(cn):
     cn.close()
 
+#metodo recoge  el ultimo id insertado
 def recoger_ultimo_Usuario():
     cn = conectar()
     cursor = cn.cursor()
@@ -21,7 +23,7 @@ def recoger_ultimo_Usuario():
     desconectar(cn)
 
     return ultimo_id
-
+#metodo que inserta un usuario
 def insertar_Usuario(usu):
     cn = conectar()
     cursor = cn.cursor()
@@ -45,6 +47,7 @@ def insertar_Usuario(usu):
 
     desconectar(cn)
 
+#metodo que inserta el test
 def insertar_Test(test):
     cn = conectar()
     cursor = cn.cursor()
