@@ -8,14 +8,7 @@ class Usuario(models.Model):
     edad = models.IntegerField()
     sexo = models.CharField(max_length=1)
     cp = models.CharField(max_length=5)
-    telefono = models.CharField(max_length=9, null=True, blank=True) # min_lenght????
-
-    # Método constructor. Sin teléfono
-    def __init__(self, edad, sexo, cp):
-        self.edad = edad
-        self.sexo = sexo
-        self.cp = cp
-        self.telefono = "" # IS NONE #################################################################
+    telefono = models.CharField(max_length=9, null=True, blank=True, default="") # min_lenght????
     
     # Método para convertirlo en String
     def __str__(self):
@@ -31,15 +24,6 @@ class Test(models.Model):
     perdida_sentidos = models.BooleanField()
     repentino = models.BooleanField()
     resultado = models.BooleanField()
-    
-    # Método constructor
-    def __init__(self, fiebre, tos_seca, asfixia, perdida_sentidos, repentino, resultado):
-        self.fiebre = fiebre
-        self.tos_seca = tos_seca
-        self.asfixia = asfixia
-        self.perdida_sentidos = perdida_sentidos
-        self.repentino = repentino
-        self.resultado = resultado
     
     # Método para convertirlo en String
     def __str__(self):

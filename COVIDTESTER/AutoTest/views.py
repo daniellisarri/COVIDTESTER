@@ -12,6 +12,12 @@ from AutoTest import recogida_datos
 # Importación de módulo externo para comprobar códigos postales
 from AutoTest import codigos_postales
 
+# Importación de los modelos para inserción en base de datos
+from AutoTest.models import Test, Usuario
+
+# Importación del módulo externo para gestionar la base de datos
+from AutoTest import gestorBD
+
 # Vista de inicio
 #
 # Sólo renderiza el archivo "index.html" y le pasa el título mediante el contexto
@@ -75,20 +81,9 @@ def auto_Test(request):
             else:
                 res = False
             
-            # Crea los JSON para introducción en base de datos más adelante
-            usu = {
-                "edad":edad,
-                "sexo":sexo,
-                "cp":cp
-            }
-            test = {
-                "fiebre":fiebre,
-                "tos_seca":tos_seca,
-                "asfixia":asfixia,
-                "perdida_sentidos":perdida_sentidos,
-                "repentino":repentino,
-                "res":res
-            }
+            # Crea los STRING con los datos para introducción en base de datos más adelante
+            usu = str(edad) + "#" + str(sexo) + "#" + str(cp)
+            test = str(fiebre) + "#" + str(tos_seca) + "#" + str(asfixia) + "#" + str(perdida_sentidos) + "#" + str(repentino) + "#" + str(res)
 
             # Pasa a la vista resultado, pasando datos de usuario, test y resultado
             return resultado(request, usu, test, res)
@@ -152,20 +147,27 @@ def posible_positivo(request):
             telefono = infForm_positivo['telefono']
 
             #
-            # Objetos JSON
+            # Recibe STRINGS
             # Hay que introducir el teléfono en el usuario (si quiere ser contactad@),
             # transformarlo a los objetos del models.py,
-            # y finalmente introducirlos en la base de datos
+            # y finalmente introducirlos en la base de datos utilizando el módulo gestor externo
             #
-            usu = request.COOKIES['usuario']
-            test = request.COOKIES['test']
-            #
-            #
-            #
-            # GUARDAR LOS OBJETOS EN BBDD
-            #
-            #
-            #
+            usu = str(request.COOKIES['usuario'])
+            sexo = usu.split("#", 2)[1]
+            edad = usu.split("#", 1)[0]
+            cp = usu.split("#", 3)[2]
+            usu_final = Usuario(0, edad, sexo, cp, telefono)
+            gestorBD.insertar_Usuario(usu_final)
+
+            test = str(request.COOKIES['test'])
+            fiebre = test.split("#", 1)[0]
+            tos_seca = test.split("#", 2)[1]
+            asfixia = test.split("#", 3)[2]
+            perdida_sentidos = test.split("#", 4)[3]
+            repentino = test.split("#", 5)[4]
+            res = test.split("#", 6)[5]
+            test_final = Test(0, 0, fiebre, tos_seca, asfixia, perdida_sentidos, repentino, res)
+            gestorBD.insertar_Test(test_final)
 
             # Comprueba si el usuario quiere ser contactado
             if contactar == "Si" and telefono != "":
@@ -197,20 +199,26 @@ def posible_positivo(request):
 # Vista usuarl, recibe request
 def negativo(request):
     #
-    # Objetos JSON
-    # Hay que introducir el teléfono en el usuario (si quiere ser contactad@),
-    # transformarlo a los objetos del models.py,
-    # y finalmente introducirlos en la base de datos
+    # Recibe STRINGS
+    # Hay que transformarlo a los objetos del models.py,
+    # y finalmente introducirlos en la base de datos utilizando el módulo gestor externo
     #
-    usu = request.COOKIES['usuario']
-    test = request.COOKIES['test']
-    #
-    #
-    #
-    # GUARDAR LOS OBJETOS EN BBDD
-    #
-    #
-    #
+    usu = str(request.COOKIES['usuario'])
+    cp = usu.split("#", 3)[2]
+    edad = usu.split("#", 1)[0]
+    sexo = usu.split("#", 2)[1]
+    usu_final = Usuario(0, edad, sexo, cp, "")
+    gestorBD.insertar_Usuario(usu_final)
+
+    test = str(request.COOKIES['test'])
+    fiebre = test.split("#", 1)[0]
+    tos_seca = test.split("#", 2)[1]
+    asfixia = test.split("#", 3)[2]
+    perdida_sentidos = test.split("#", 4)[3]
+    repentino = test.split("#", 5)[4]
+    res = test.split("#", 6)[5]
+    test_final = Test(0, 0, fiebre, tos_seca, asfixia, perdida_sentidos, repentino, res)
+    gestorBD.insertar_Test(test_final)
 
     # Renderiza la página index.html pasándole, además de los datos de la API, que el resultado es negativo
     datos = recogida_datos.recoger_datos()
