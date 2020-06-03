@@ -187,3 +187,7 @@ Usamos [GIT](https://git-scm.com/) como software de control de versiones. El rep
 
 También puedes mirar la lista de todos los [contribuyentes](https://github.com/daniellisarri/COVIDTESTER/graphs/contributors) quíenes han participado en este proyecto. 
 >>>>>>> 607656f12282272ddee7de3829c99c07bbb24ec4
+
+
+NOTA ADJUNTA:
+Para los usuarios de PyCharm hay que instalarse un paquete adicional, para ello tendreis que iros al archivo de recogida_datos salta un error en el import de requests, pones el raton encima de requests y te aparece una bombilla roja con un menu desplegable, abres el menu y le das a instalar el paquete requests y ya deberia de funcionar
